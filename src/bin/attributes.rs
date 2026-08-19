@@ -26,6 +26,9 @@ fn main() {
     }
 
     if point1 == point3 {
-        println!("The points are equal, point1: {:?}, point3: {:?}", point1, point3);
+        println!(
+            "The points are equal, point1: {:?}, point3: {:?}",
+            point1, point3
+        );
     }
 }

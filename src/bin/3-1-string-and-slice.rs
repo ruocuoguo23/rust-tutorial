@@ -16,7 +16,8 @@ fn main() {
     // println!("First character: {}", first_char);
 
     // Instead, we can use chars() to access individual Unicode scalar values
-    if let Some(first_char) = hello_string.chars().nth(0) { // Get first character
+    if let Some(first_char) = hello_string.chars().nth(0) {
+        // Get first character
         println!("First character: {}", first_char);
     }
 
@@ -24,8 +25,10 @@ fn main() {
     let hello_slice = &hello_string[0..5]; // Correct slicing at character boundaries
     println!("Slice: {}", hello_slice);
 
-    // If we try to slice at non-character boundary, it will cause a runtime error
-    // let broken_slice = &hello_string[0..4]; // This will panic at runtime
+    // Slicing inside a multi-byte UTF-8 code point panics at runtime.
+    let chinese = "世界";
+    // let broken_slice = &chinese[0..1]; // Byte 1 is not a char boundary.
+    println!("Valid UTF-8 slice: {}", &chinese[0..3]);
 
     // Concatenating strings with the `+` operator
     let world_string = String::from("Hello, Rustaceans!");

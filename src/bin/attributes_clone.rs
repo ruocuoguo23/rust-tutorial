@@ -22,6 +22,14 @@ fn main() {
     let shared_data2 = shared_data1.clone();
 
     // the data is not cloned, only the reference count is increased
-    println!("Name: {}, Data pointer: {:?}", shared_data1.name, Rc::as_ptr(&shared_data1.big_data));
-    println!("Name: {}, Data pointer: {:?}", shared_data2.name, Rc::as_ptr(&shared_data2.big_data));
+    println!(
+        "Name: {}, Data pointer: {:?}",
+        shared_data1.name,
+        Rc::as_ptr(&shared_data1.big_data)
+    );
+    println!(
+        "Name: {}, Data pointer: {:?}",
+        shared_data2.name,
+        Rc::as_ptr(&shared_data2.big_data)
+    );
 }
