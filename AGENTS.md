@@ -8,22 +8,23 @@
 
 - `Cargo.toml`：项目配置。除非示例确实需要，优先只使用标准库。
 - `src/main.rs`：默认入口，只保留最基础的运行示例。
-- `src/bin/*.rs`：教程示例；每个文件都是一个可单独运行的二进制程序。
+- `src/bin/<chapter>-<topic>/main.rs`：教程示例；每个目录对应手册中的一个章节，并作为一个可单独运行的二进制程序。
 
 运行指定示例：
 
 ```bash
-cargo run --bin 2-1-ownership
+cargo run --bin 02-ownership-move-copy-clone
 ```
 
 ## 新增或修改示例
 
-1. 一个文件只讲一个主要知识点，避免把无关概念混在同一个示例中。
-2. 新示例放在 `src/bin/`，延续现有的编号和 kebab-case 命名方式，例如 `3-3-pattern-matching.rs`。
-3. 示例必须包含 `fn main()`，并能通过 `cargo run --bin <文件名（不含 .rs）>` 独立运行。
+1. 一个目录只讲一个主要章节，避免把无关概念混在同一个示例中。
+2. 新示例放在 `src/bin/<chapter>-<topic>/`，章节号使用两位数字，主题使用 kebab-case，例如 `03-borrowing-lifetimes`。
+3. 示例必须包含 `main.rs` 和 `fn main()`，并能通过 `cargo run --bin <chapter>-<topic>` 独立运行。
 4. 使用简短注释解释“为什么”，不要逐行复述代码。术语和注释风格应与相邻示例保持一致。
 5. 输出应简洁、稳定，并能直观体现当前语言特性。
 6. 优先使用最小代码展示概念，不为教程示例引入不必要的抽象、依赖或工程化结构。
+7. 同一章节的补充代码优先合并到章节目录和同一运行入口，不创建未编号的平级 binary。
 
 ## 无法编译或会 panic 的教学代码
 

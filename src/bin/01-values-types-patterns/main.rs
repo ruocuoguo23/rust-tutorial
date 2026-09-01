@@ -10,6 +10,11 @@ fn lookup(id: u32) -> Option<User> {
 }
 
 fn main() {
+    let mut x = 5;
+    println!("The value of x is: {}", x);
+    x = 6;
+    println!("The value of x is: {}", x);
+
     let spaces = "   ";
     let spaces = spaces.len(); // Shadowing can change the binding's type.
     println!("Shadowed value: {spaces}");

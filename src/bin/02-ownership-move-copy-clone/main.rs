@@ -1,3 +1,15 @@
+use std::rc::Rc;
+
+struct BigData {
+    data: Vec<i32>,
+}
+
+#[derive(Clone)]
+struct SharedData {
+    name: String,
+    big_data: Rc<BigData>,
+}
+
 fn inspect(name: &str) -> usize {
     name.len()
 }
@@ -20,4 +32,19 @@ fn main() {
     let consumed_len = consume(name);
     println!("Move: backup={backup}, consumed_len={consumed_len}");
     // println!("{name}"); // E0382: name was moved into consume.
+
+    let big_data = Rc::new(BigData {
+        data: vec![1; 100000],
+    });
+    let shared_data1 = SharedData {
+        name: "Alice".to_string(),
+        big_data: Rc::clone(&big_data),
+    };
+    let shared_data2 = shared_data1.clone();
+    println!(
+        "Shared Clone: name={}, len={}, same allocation={}",
+        shared_data1.name,
+        shared_data1.big_data.data.len(),
+        Rc::ptr_eq(&shared_data1.big_data, &shared_data2.big_data)
+    );
 }

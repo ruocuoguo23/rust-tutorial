@@ -1,5 +1,17 @@
 use std::num::ParseIntError;
 
+#[derive(Debug)]
+enum PokerSuit {
+    Clubs,
+    Spades,
+    Diamonds,
+    Hearts,
+}
+
+fn print_suit(card: PokerSuit) {
+    println!("{card:?}");
+}
+
 fn parse_port(raw: &str) -> Result<u16, ParseIntError> {
     let port = raw.parse::<u16>()?;
     Ok(port)
@@ -13,6 +25,9 @@ fn configured_port(raw: Option<&str>) -> Result<u16, ParseIntError> {
 }
 
 fn main() -> Result<(), ParseIntError> {
+    print_suit(PokerSuit::Hearts);
+    print_suit(PokerSuit::Diamonds);
+
     println!("Configured port: {}", configured_port(Some("9000"))?);
     println!("Default port: {}", configured_port(None)?);
     println!("Invalid input is Err: {}", parse_port("many").is_err());
