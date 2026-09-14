@@ -13,13 +13,13 @@
 运行指定示例：
 
 ```bash
-cargo run --bin 02-ownership-move-copy-clone
+cargo run --bin 01-ownership-and-borrowing
 ```
 
 ## 新增或修改示例
 
 1. 一个目录只讲一个主要章节，避免把无关概念混在同一个示例中。
-2. 新示例放在 `src/bin/<chapter>-<topic>/`，章节号使用两位数字，主题使用 kebab-case，例如 `03-borrowing-lifetimes`。
+2. 新示例放在 `src/bin/<chapter>-<topic>/`，章节号使用两位数字，主题使用 kebab-case，例如 `01-ownership-and-borrowing`。01–07 对应七条主线，08 是补充篇；章内按 P0 → P1 组织示例，同一主题的模块共用该章入口。
 3. 示例必须包含 `main.rs` 和 `fn main()`，并能通过 `cargo run --bin <chapter>-<topic>` 独立运行。
 4. 使用简短注释解释“为什么”，不要逐行复述代码。术语和注释风格应与相邻示例保持一致。
 5. 输出应简洁、稳定，并能直观体现当前语言特性。

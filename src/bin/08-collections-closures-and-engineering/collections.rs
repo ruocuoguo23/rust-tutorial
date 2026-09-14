@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn main() {
+pub fn run() {
     // Immutable string slice
     let hello = "Hello, world!"; // This is a string slice (&str) and is immutable
     println!("{}", hello);
@@ -18,7 +18,7 @@ fn main() {
     // println!("First character: {}", first_char);
 
     // Instead, we can use chars() to access individual Unicode scalar values
-    if let Some(first_char) = hello_string.chars().nth(0) {
+    if let Some(first_char) = hello_string.chars().next() {
         // Get first character
         println!("First character: {}", first_char);
     }
@@ -31,6 +31,12 @@ fn main() {
     let chinese = "世界";
     // let broken_slice = &chinese[0..1]; // Byte 1 is not a char boundary.
     println!("Valid UTF-8 slice: {}", &chinese[0..3]);
+    assert_eq!(chinese.get(0..1), None); // Checked slicing rejects the same invalid boundary.
+    println!(
+        "UTF-8: bytes={}, scalar values={}",
+        chinese.len(),
+        chinese.chars().count()
+    );
 
     // Concatenating strings with the `+` operator
     let world_string = String::from("Hello, Rustaceans!");
@@ -55,14 +61,16 @@ fn main() {
 
     // UTF-8 iteration over characters
     let unicode_string = "नमस्ते";
-    for c in unicode_string.chars() {
-        println!("{}", c);
-    }
+    println!(
+        "Unicode scalar values: {:?}",
+        unicode_string.chars().collect::<Vec<_>>()
+    );
 
     // UTF-8 iteration over bytes
-    for b in unicode_string.bytes() {
-        println!("{}", b);
-    }
+    println!(
+        "UTF-8 bytes: {:?}",
+        unicode_string.bytes().collect::<Vec<_>>()
+    );
 
     // Attempting to create a string slice from String using range indexing
     // This is safe because the character boundaries are respected
@@ -91,4 +99,8 @@ fn main() {
     }
     println!("rust count: {}", counts["rust"]);
     println!("go count: {}", counts["go"]);
+    let mut entries: Vec<_> = counts.into_iter().collect();
+    entries.sort_unstable_by_key(|(word, _)| *word);
+    assert_eq!(entries, [("go", 1), ("rust", 2)]);
+    println!("Explicitly sorted HashMap entries: {entries:?}");
 }
