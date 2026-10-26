@@ -1,4 +1,9 @@
-use std::cell::Cell;
+// 问题：Fn、FnMut、FnOnce 取决于捕获方式还是闭包实际怎样使用捕获值？
+// 输入与状态：move 闭包反复读取拥有的 String，另一个闭包更新计数，第三个闭包把 String 移出。
+// 结果证据：重复调用 Fn 得到同一长度，FnMut 两次返回 1、2，FnOnce 把 String 所有权交给调用方。
+// 改一处：取消注释 consume() 的第二次调用，观察 FnOnce-only 闭包已被消费。
+// 边界：move 捕获也可以实现 Fn；FnOnce 表示按值调用能力，不代表所有实现者只能调用一次。
+// 运行：cargo run --locked --example 08-closure-traits
 
 fn call_once<F, T>(operation: F) -> T
 where
@@ -7,17 +12,8 @@ where
     operation()
 }
 
-pub fn run() {
-    let mut words = vec![String::from("rust"), String::from("go")];
-
-    let lengths: Vec<usize> = words.iter().map(String::len).collect();
-    println!("Lengths from iter: {lengths:?}");
-
-    for word in words.iter_mut() {
-        word.push('!');
-    }
-    println!("After iter_mut: {words:?}");
-
+pub fn main() {
+    println!("P1 supplement: Fn / FnMut / FnOnce");
     let label = String::from("owned by an Fn closure");
     let length = move || label.len(); // Owning capture still permits repeated read-only calls.
     assert_eq!(length(), length());
@@ -35,23 +31,6 @@ pub fn run() {
     let consume = move || label; // Moving out of the capture makes this closure FnOnce-only.
     println!("FnOnce returned ownership: {}", call_once(consume));
     // consume(); // E0382: call_once already consumed the closure.
-
-    let visits = Cell::new(0);
-    let lazy = words.iter().map(|word| {
-        visits.set(visits.get() + 1);
-        word.len()
-    });
-    assert_eq!(visits.get(), 0);
-    let lengths: Vec<_> = lazy.collect();
-    assert_eq!(visits.get(), words.len());
-    println!(
-        "Lazy map: 0 visits before collect, {} after; {lengths:?}",
-        visits.get()
-    );
-
-    let upper: Vec<String> = words.into_iter().map(|word| word.to_uppercase()).collect();
-    println!("Owned items from into_iter: {upper:?}");
-    // println!("{words:?}"); // E0382: into_iter moved words.
 }
 
 #[cfg(test)]

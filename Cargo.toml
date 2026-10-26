@@ -6,4 +6,229 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = { version = "=1.53.1", features = ["macros", "rt", "sync"] }
+tokio = { version = "=1.53.1", features = ["macros", "rt", "sync", "time"] }
+
+[[example]]
+name = "01-move-copy-clone"
+path = "examples/01-ownership-and-borrowing/move-copy-clone.rs"
+test = true
+
+[[example]]
+name = "01-borrow-nll"
+path = "examples/01-ownership-and-borrowing/borrow-nll.rs"
+test = true
+
+[[example]]
+name = "01-lifetimes"
+path = "examples/01-ownership-and-borrowing/lifetimes.rs"
+test = true
+
+[[example]]
+name = "01-partial-move-take-replace"
+path = "examples/01-ownership-and-borrowing/partial-move-take-replace.rs"
+test = true
+
+[[example]]
+name = "01-reborrow-static"
+path = "examples/01-ownership-and-borrowing/reborrow-static.rs"
+test = true
+
+[[example]]
+name = "02-expressions-shadowing"
+path = "examples/02-type-system-and-error-handling/expressions-shadowing.rs"
+test = true
+
+[[example]]
+name = "02-structs-enums-patterns"
+path = "examples/02-type-system-and-error-handling/structs-enums-patterns.rs"
+test = true
+
+[[example]]
+name = "02-pattern-ownership"
+path = "examples/02-type-system-and-error-handling/pattern-ownership.rs"
+test = true
+
+[[example]]
+name = "02-option-result-propagation"
+path = "examples/02-type-system-and-error-handling/option-result-propagation.rs"
+test = true
+
+[[example]]
+name = "02-typed-errors"
+path = "examples/02-type-system-and-error-handling/typed-errors.rs"
+test = true
+
+[[example]]
+name = "03-trait-dispatch"
+path = "examples/03-traits-generics-and-dispatch/trait-dispatch.rs"
+test = true
+
+[[example]]
+name = "03-associated-types"
+path = "examples/03-traits-generics-and-dispatch/associated-types.rs"
+test = true
+
+[[example]]
+name = "03-newtype-conversions"
+path = "examples/03-traits-generics-and-dispatch/newtype-conversions.rs"
+test = true
+
+[[example]]
+name = "03-derive-equality"
+path = "examples/03-traits-generics-and-dispatch/derive-equality.rs"
+test = true
+
+[[example]]
+name = "04-box-dst"
+path = "examples/04-memory-and-smart-pointers/box-dst.rs"
+test = true
+
+[[example]]
+name = "04-shared-ownership"
+path = "examples/04-memory-and-smart-pointers/shared-ownership.rs"
+test = true
+
+[[example]]
+name = "04-interior-mutability"
+path = "examples/04-memory-and-smart-pointers/interior-mutability.rs"
+test = true
+
+[[example]]
+name = "04-drop-raii"
+path = "examples/04-memory-and-smart-pointers/drop-raii.rs"
+test = true
+
+[[example]]
+name = "04-deref-coercion"
+path = "examples/04-memory-and-smart-pointers/deref-coercion.rs"
+test = true
+
+[[example]]
+name = "05-thread-ownership-scope"
+path = "examples/05-concurrency-and-synchronization/thread-ownership-scope.rs"
+test = true
+
+[[example]]
+name = "05-send-sync"
+path = "examples/05-concurrency-and-synchronization/send-sync.rs"
+test = true
+
+[[example]]
+name = "05-mutex-guard-invariants"
+path = "examples/05-concurrency-and-synchronization/mutex-guard-invariants.rs"
+test = true
+
+[[example]]
+name = "05-logical-race"
+path = "examples/05-concurrency-and-synchronization/logical-race.rs"
+test = true
+
+[[example]]
+name = "05-lock-order"
+path = "examples/05-concurrency-and-synchronization/lock-order.rs"
+test = true
+
+[[example]]
+name = "05-bounded-channel"
+path = "examples/05-concurrency-and-synchronization/bounded-channel.rs"
+test = true
+
+[[example]]
+name = "05-rwlock"
+path = "examples/05-concurrency-and-synchronization/rwlock.rs"
+test = true
+
+[[example]]
+name = "05-atomic-updates"
+path = "examples/05-concurrency-and-synchronization/atomic-updates.rs"
+test = true
+
+[[example]]
+name = "05-memory-ordering"
+path = "examples/05-concurrency-and-synchronization/memory-ordering.rs"
+test = true
+
+[[example]]
+name = "06-lazy-future-await"
+path = "examples/06-async-future-and-tokio/lazy-future-await.rs"
+test = true
+
+[[example]]
+name = "06-spawn-blocking"
+path = "examples/06-async-future-and-tokio/spawn-blocking.rs"
+test = true
+
+[[example]]
+name = "06-poll-waker"
+path = "examples/06-async-future-and-tokio/poll-waker.rs"
+test = true
+
+[[example]]
+name = "06-pin-unpin"
+path = "examples/06-async-future-and-tokio/pin-unpin.rs"
+test = true
+
+[[example]]
+name = "06-send-future"
+path = "examples/06-async-future-and-tokio/send-future.rs"
+test = true
+
+[[example]]
+name = "06-select-cancellation"
+path = "examples/06-async-future-and-tokio/select-cancellation.rs"
+test = true
+
+[[example]]
+name = "06-channel-cancellation"
+path = "examples/06-async-future-and-tokio/channel-cancellation.rs"
+test = true
+
+[[example]]
+name = "06-detach-abort"
+path = "examples/06-async-future-and-tokio/detach-abort.rs"
+test = true
+
+[[example]]
+name = "07-raw-pointer-safe-wrapper"
+path = "examples/07-unsafe-and-ffi/raw-pointer-safe-wrapper.rs"
+test = true
+
+[[example]]
+name = "07-ffi-handle"
+path = "examples/07-unsafe-and-ffi/ffi-handle.rs"
+test = true
+
+[[example]]
+name = "08-strings-utf8"
+path = "examples/08-collections-closures-and-engineering/strings-utf8.rs"
+test = true
+
+[[example]]
+name = "08-vec-slice"
+path = "examples/08-collections-closures-and-engineering/vec-slice.rs"
+test = true
+
+[[example]]
+name = "08-hashmap-entry"
+path = "examples/08-collections-closures-and-engineering/hashmap-entry.rs"
+test = true
+
+[[example]]
+name = "08-cow"
+path = "examples/08-collections-closures-and-engineering/cow.rs"
+test = true
+
+[[example]]
+name = "08-closure-traits"
+path = "examples/08-collections-closures-and-engineering/closure-traits.rs"
+test = true
+
+[[example]]
+name = "08-lazy-iterators"
+path = "examples/08-collections-closures-and-engineering/lazy-iterators.rs"
+test = true
+
+[[example]]
+name = "08-macro-evaluation"
+path = "examples/08-collections-closures-and-engineering/macro-evaluation.rs"
+test = true

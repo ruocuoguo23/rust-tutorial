@@ -1,3 +1,10 @@
+// 问题：Struct、Enum 与模式匹配如何表达不同状态？
+// 输入与状态：lookup(7) 返回 User；match 选择角色并分别读取 Pending、Done、Failed；PokerSuit 有四种值。
+// 结果证据：输出四种花色与三种状态；测试覆盖 lookup 的 Some/None 和所有 State 分支。
+// 改一处：把 lookup(7) 改为 lookup(8)，观察 let-else 提前返回。
+// 边界：Enum 一次只处于一个变体；新增变体后必须补全穷尽匹配。
+// 运行：cargo run --locked --example 02-structs-enums-patterns
+
 #[derive(Debug)]
 struct User {
     name: String,
@@ -23,22 +30,19 @@ fn describe(state: &State) -> String {
     }
 }
 
-pub fn run() {
-    let mut x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
+#[derive(Debug)]
+enum PokerSuit {
+    Clubs,
+    Spades,
+    Diamonds,
+    Hearts,
+}
 
-    let spaces = "   ";
-    let spaces = spaces.len(); // Shadowing can change the binding's type.
-    println!("Shadowed value: {spaces}");
+fn print_suit(card: PokerSuit) {
+    println!("{card:?}");
+}
 
-    let block_value = {
-        let base = 2;
-        base * 3 // No semicolon: this block evaluates to 6.
-    };
-    println!("Block value: {block_value}");
-
+pub fn main() {
     let Some(user) = lookup(7) else {
         println!("User not found");
         return;
@@ -58,14 +62,10 @@ pub fn run() {
         println!("Enum state: {}", describe(&state));
     }
 
-    let value = Some(String::from("kept by borrowing"));
-    if let Some(name) = &value {
-        println!("Borrowed pattern: {name}");
-    }
-    let _ = value; // Wildcard does not take ownership of this place.
-    assert!(value.is_some());
-    let _owned = value; // A named binding moves this non-Copy value.
-                        // println!("{value:?}"); // E0382: value was moved into _owned.
+    print_suit(PokerSuit::Clubs);
+    print_suit(PokerSuit::Spades);
+    print_suit(PokerSuit::Hearts);
+    print_suit(PokerSuit::Diamonds);
 }
 
 #[cfg(test)]

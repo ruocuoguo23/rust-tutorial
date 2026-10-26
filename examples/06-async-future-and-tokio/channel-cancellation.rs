@@ -1,7 +1,14 @@
+// 问题：有界通道等待发送时被取消，消息的所有权会怎样？
+// 输入与状态：容量 1 的队列先装满；biased select 确保发送或预留先等待，再选择取消分支。
+// 结果证据：通道按序收到 [7,8]；取消 send 丢弃其拥有的消息一次，取消 reserve 保留外部消息。
+// 改一处：增大容量让发送可立即完成，观察“队列已满”的前提不再成立。
+// 边界：取消 reserve 会丢失排队位置；先预留容量可以保住外部消息，但不会回滚已经发生的业务副作用。
+// 运行：cargo run --locked --example 06-channel-cancellation
+
 use std::future;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
-use tokio::sync::{mpsc, oneshot};
+use tokio::sync::mpsc;
 
 #[derive(Debug)]
 struct Message(&'static str, Arc<AtomicUsize>);
@@ -65,29 +72,18 @@ pub async fn cancelled_reservation_keeps_the_message() -> String {
     unsent // Cancelling reserve loses the queue position, not this value.
 }
 
-pub async fn detached_task_completes() -> u8 {
-    let (finish, finished) = oneshot::channel();
-    let handle = tokio::spawn(async move {
-        finish.send(42).unwrap();
-    });
-    drop(handle); // Dropping JoinHandle detaches; it does not abort the task.
-    finished.await.unwrap() // Completion acknowledgement, without timing assumptions.
-}
-
-pub async fn aborted_task_keeps_prior_effects() -> usize {
-    let effects = Arc::new(AtomicUsize::new(0));
-    let observed = Arc::clone(&effects);
-    let (started, ready) = oneshot::channel();
-    let handle = tokio::spawn(async move {
-        observed.fetch_add(1, Ordering::Relaxed);
-        started.send(()).unwrap();
-        future::pending::<()>().await;
-        observed.fetch_add(1, Ordering::Relaxed);
-    });
-    ready.await.unwrap(); // Ensure the first effect happened before requesting cancellation.
-    handle.abort();
-    assert!(handle.await.unwrap_err().is_cancelled());
-    effects.load(Ordering::Relaxed) // Cancellation stops the next step, but does not roll back 1.
+#[tokio::main(flavor = "current_thread")]
+pub async fn main() {
+    println!("P1: Bounded channel / cancellation");
+    println!("Drained channel: {:?}", bounded_messages().await);
+    println!(
+        "Cancelled send drops: {}",
+        cancelled_send_drops_its_message().await
+    );
+    println!(
+        "Cancelled reserve retains: {}",
+        cancelled_reservation_keeps_the_message().await
+    );
 }
 
 #[cfg(test)]
@@ -106,11 +102,5 @@ mod tests {
     async fn send_cancellation_drops_owned_message_but_reserve_keeps_it() {
         assert_eq!(cancelled_send_drops_its_message().await, 1);
         assert_eq!(cancelled_reservation_keeps_the_message().await, "keep me");
-    }
-
-    #[tokio::test]
-    async fn detach_and_abort_have_different_effects() {
-        assert_eq!(detached_task_completes().await, 42);
-        assert_eq!(aborted_task_keeps_prior_effects().await, 1);
     }
 }

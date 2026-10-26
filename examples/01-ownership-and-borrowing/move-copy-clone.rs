@@ -1,3 +1,10 @@
+// 问题：何时复制值，何时转移所有权，Clone 是否一定复制全部资源？
+// 输入与状态：i32 赋值后两份绑定可用；String 克隆后原值被消费；Rc 克隆后共享同一分配。
+// 结果证据：输出显示 Copy、Move、共享 Clone 的结果和 same allocation=true。
+// 改一处：取消最后一次使用 name 的注释，观察 Move 后的 E0382。
+// 边界：Copy 不保证复制成本低；Clone 的行为由类型实现决定。
+// 运行：cargo run --locked --example 01-move-copy-clone
+
 use std::rc::Rc;
 
 struct BigData {
@@ -18,7 +25,7 @@ fn consume(name: String) -> usize {
     name.len()
 }
 
-pub fn run() {
+pub fn main() {
     let retries = 3;
     let copied = retries; // i32 implements Copy, so both bindings remain usable.
     println!("Copy: retries={retries}, copied={copied}");
@@ -47,31 +54,4 @@ pub fn run() {
         shared_data1.big_data.data.len(),
         Rc::ptr_eq(&shared_data1.big_data, &shared_data2.big_data)
     );
-}
-
-pub fn partial_move_and_take() {
-    struct User {
-        name: String,
-        age: u8,
-    }
-    let user = User {
-        name: String::from("Ada"),
-        age: 20,
-    };
-    let name = user.name;
-    println!("Partial move: name={name}, remaining age={}", user.age);
-    // let whole = user; // E0382: name was moved; user is no longer a complete value.
-
-    let mut text = name;
-    let taken = std::mem::take(&mut text);
-    assert!(text.is_empty());
-    let previous = std::mem::replace(&mut text, String::from("Grace"));
-    assert!(previous.is_empty());
-    println!("take: old={taken}; replace: current={text}");
-
-    let mut pending = Some(taken);
-    let delivered = pending.take();
-    assert!(pending.is_none());
-    println!("Option::take: delivered={delivered:?}, remaining={pending:?}");
-    // take/replace leave a valid value; its business meaning still needs a contract.
 }

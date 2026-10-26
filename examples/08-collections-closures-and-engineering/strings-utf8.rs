@@ -1,6 +1,12 @@
-use std::collections::HashMap;
+// 问题：String 与 str 如何区分，为什么字符串不能按整数下标取字符？
+// 输入与状态：从 &str 创建并拼接 String；用“世界”比较字节长度、Unicode 标量数量和合法切片边界。
+// 结果证据：“世界”为 6 字节、2 个标量；get(0..1) 返回 None，0..3 得到“世”。
+// 改一处：把 get(0..1) 改为 get(0..3)，观察 Some("世")，原来的 None 断言会失败。
+// 边界：chars 产生 Unicode 标量而非用户感知字符；区间按字节计数，非法直接切片会 panic。
+// 运行：cargo run --locked --example 08-strings-utf8
 
-pub fn run() {
+pub fn main() {
+    println!("P1 supplement: String / str / UTF-8");
     // Immutable string slice
     let hello = "Hello, world!"; // This is a string slice (&str) and is immutable
     println!("{}", hello);
@@ -79,28 +85,4 @@ pub fn run() {
     println!("Hello slice: {}", hello);
     let world = &hello_world[7..]; // Rest of the string, "世界!" is correctly sliced
     println!("World slice: {}", world);
-
-    let mut values = vec![10, 20, 30];
-    {
-        let first = &values[0];
-        println!("Borrowed first value: {first}");
-    }
-    values.push(40); // The element borrow ended before Vec was mutated.
-    println!("Vec after push: {values:?}");
-
-    // The following order cannot compile because push needs &mut Vec while first is live:
-    // let first = &values[0];
-    // values.push(50); // E0502
-    // println!("{first}");
-
-    let mut counts = HashMap::new();
-    for word in ["rust", "go", "rust"] {
-        *counts.entry(word).or_insert(0) += 1;
-    }
-    println!("rust count: {}", counts["rust"]);
-    println!("go count: {}", counts["go"]);
-    let mut entries: Vec<_> = counts.into_iter().collect();
-    entries.sort_unstable_by_key(|(word, _)| *word);
-    assert_eq!(entries, [("go", 1), ("rust", 2)]);
-    println!("Explicitly sorted HashMap entries: {entries:?}");
 }
