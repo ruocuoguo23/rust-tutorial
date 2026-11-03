@@ -9,226 +9,451 @@ edition = "2021"
 tokio = { version = "=1.53.1", features = ["macros", "rt", "sync", "time"] }
 
 [[example]]
-name = "01-move-copy-clone"
-path = "examples/01-ownership-and-borrowing/move-copy-clone.rs"
+name = "01-expressions-shadowing"
+path = "examples/01-language-foundations-and-control-flow/expressions-shadowing.rs"
 test = true
 
 [[example]]
-name = "01-borrow-nll"
-path = "examples/01-ownership-and-borrowing/borrow-nll.rs"
+name = "01-struct-basics"
+path = "examples/01-language-foundations-and-control-flow/struct-basics.rs"
 test = true
 
 [[example]]
-name = "01-lifetimes"
-path = "examples/01-ownership-and-borrowing/lifetimes.rs"
+name = "01-enum-basics"
+path = "examples/01-language-foundations-and-control-flow/enum-basics.rs"
 test = true
 
 [[example]]
-name = "01-partial-move-take-replace"
-path = "examples/01-ownership-and-borrowing/partial-move-take-replace.rs"
+name = "01-match-basics"
+path = "examples/01-language-foundations-and-control-flow/match-basics.rs"
 test = true
 
 [[example]]
-name = "01-reborrow-static"
-path = "examples/01-ownership-and-borrowing/reborrow-static.rs"
+name = "01-match-guard"
+path = "examples/01-language-foundations-and-control-flow/match-guard.rs"
 test = true
 
 [[example]]
-name = "02-expressions-shadowing"
-path = "examples/02-type-system-and-error-handling/expressions-shadowing.rs"
+name = "01-pattern-ownership"
+path = "examples/01-language-foundations-and-control-flow/pattern-ownership.rs"
 test = true
 
 [[example]]
-name = "02-structs-enums-patterns"
-path = "examples/02-type-system-and-error-handling/structs-enums-patterns.rs"
+name = "01-control-flow-patterns"
+path = "examples/01-language-foundations-and-control-flow/control-flow-patterns.rs"
 test = true
 
 [[example]]
-name = "02-pattern-ownership"
-path = "examples/02-type-system-and-error-handling/pattern-ownership.rs"
+name = "01-structs-enums-patterns"
+path = "examples/01-language-foundations-and-control-flow/structs-enums-patterns.rs"
 test = true
 
 [[example]]
-name = "02-option-result-propagation"
-path = "examples/02-type-system-and-error-handling/option-result-propagation.rs"
+name = "02-move-value"
+path = "examples/02-ownership-and-lifetimes/move-value.rs"
 test = true
 
 [[example]]
-name = "02-typed-errors"
-path = "examples/02-type-system-and-error-handling/typed-errors.rs"
+name = "02-copy-value"
+path = "examples/02-ownership-and-lifetimes/copy-value.rs"
 test = true
 
 [[example]]
-name = "03-trait-dispatch"
-path = "examples/03-traits-generics-and-dispatch/trait-dispatch.rs"
+name = "02-clone-value"
+path = "examples/02-ownership-and-lifetimes/clone-value.rs"
+test = true
+
+[[example]]
+name = "02-borrow-nll"
+path = "examples/02-ownership-and-lifetimes/borrow-nll.rs"
+test = true
+
+[[example]]
+name = "02-lifetimes"
+path = "examples/02-ownership-and-lifetimes/lifetimes.rs"
+test = true
+
+[[example]]
+name = "02-move-copy-clone"
+path = "examples/02-ownership-and-lifetimes/move-copy-clone.rs"
+test = true
+
+[[example]]
+name = "02-partial-move-take-replace"
+path = "examples/02-ownership-and-lifetimes/partial-move-take-replace.rs"
+test = true
+
+[[example]]
+name = "02-reborrow-static"
+path = "examples/02-ownership-and-lifetimes/reborrow-static.rs"
+test = true
+
+[[example]]
+name = "03-generic-basics"
+path = "examples/03-functions-generics-and-traits/generic-basics.rs"
+test = true
+
+[[example]]
+name = "03-trait-bound"
+path = "examples/03-functions-generics-and-traits/trait-bound.rs"
+test = true
+
+[[example]]
+name = "03-impl-trait-argument"
+path = "examples/03-functions-generics-and-traits/impl-trait-argument.rs"
+test = true
+
+[[example]]
+name = "03-impl-trait-return"
+path = "examples/03-functions-generics-and-traits/impl-trait-return.rs"
+test = true
+
+[[example]]
+name = "03-dyn-borrowed"
+path = "examples/03-functions-generics-and-traits/dyn-borrowed.rs"
+test = true
+
+[[example]]
+name = "03-dyn-collection"
+path = "examples/03-functions-generics-and-traits/dyn-collection.rs"
 test = true
 
 [[example]]
 name = "03-associated-types"
-path = "examples/03-traits-generics-and-dispatch/associated-types.rs"
+path = "examples/03-functions-generics-and-traits/associated-types.rs"
+test = true
+
+[[example]]
+name = "03-closure-fn"
+path = "examples/03-functions-generics-and-traits/closure-fn.rs"
+test = true
+
+[[example]]
+name = "03-closure-fn-mut"
+path = "examples/03-functions-generics-and-traits/closure-fn-mut.rs"
+test = true
+
+[[example]]
+name = "03-closure-fn-once"
+path = "examples/03-functions-generics-and-traits/closure-fn-once.rs"
+test = true
+
+[[example]]
+name = "03-lazy-iterators"
+path = "examples/03-functions-generics-and-traits/lazy-iterators.rs"
+test = true
+
+[[example]]
+name = "03-iterator-ownership"
+path = "examples/03-functions-generics-and-traits/iterator-ownership.rs"
 test = true
 
 [[example]]
 name = "03-newtype-conversions"
-path = "examples/03-traits-generics-and-dispatch/newtype-conversions.rs"
+path = "examples/03-functions-generics-and-traits/newtype-conversions.rs"
 test = true
 
 [[example]]
 name = "03-derive-equality"
-path = "examples/03-traits-generics-and-dispatch/derive-equality.rs"
+path = "examples/03-functions-generics-and-traits/derive-equality.rs"
 test = true
 
 [[example]]
-name = "04-box-dst"
-path = "examples/04-memory-and-smart-pointers/box-dst.rs"
+name = "03-closure-traits"
+path = "examples/03-functions-generics-and-traits/closure-traits.rs"
 test = true
 
 [[example]]
-name = "04-shared-ownership"
-path = "examples/04-memory-and-smart-pointers/shared-ownership.rs"
+name = "03-trait-dispatch"
+path = "examples/03-functions-generics-and-traits/trait-dispatch.rs"
 test = true
 
 [[example]]
-name = "04-interior-mutability"
-path = "examples/04-memory-and-smart-pointers/interior-mutability.rs"
+name = "04-option-basics"
+path = "examples/04-error-handling/option-basics.rs"
 test = true
 
 [[example]]
-name = "04-drop-raii"
-path = "examples/04-memory-and-smart-pointers/drop-raii.rs"
+name = "04-result-basics"
+path = "examples/04-error-handling/result-basics.rs"
 test = true
 
 [[example]]
-name = "04-deref-coercion"
-path = "examples/04-memory-and-smart-pointers/deref-coercion.rs"
+name = "04-result-explicit-return"
+path = "examples/04-error-handling/result-explicit-return.rs"
 test = true
 
 [[example]]
-name = "05-thread-ownership-scope"
-path = "examples/05-concurrency-and-synchronization/thread-ownership-scope.rs"
+name = "04-result-question-mark"
+path = "examples/04-error-handling/result-question-mark.rs"
 test = true
 
 [[example]]
-name = "05-send-sync"
-path = "examples/05-concurrency-and-synchronization/send-sync.rs"
+name = "04-option-question-mark"
+path = "examples/04-error-handling/option-question-mark.rs"
 test = true
 
 [[example]]
-name = "05-mutex-guard-invariants"
-path = "examples/05-concurrency-and-synchronization/mutex-guard-invariants.rs"
+name = "04-result-option-states"
+path = "examples/04-error-handling/result-option-states.rs"
 test = true
 
 [[example]]
-name = "05-logical-race"
-path = "examples/05-concurrency-and-synchronization/logical-race.rs"
+name = "04-option-result-propagation"
+path = "examples/04-error-handling/option-result-propagation.rs"
 test = true
 
 [[example]]
-name = "05-lock-order"
-path = "examples/05-concurrency-and-synchronization/lock-order.rs"
+name = "04-typed-errors"
+path = "examples/04-error-handling/typed-errors.rs"
 test = true
 
 [[example]]
-name = "05-bounded-channel"
-path = "examples/05-concurrency-and-synchronization/bounded-channel.rs"
+name = "05-string-view"
+path = "examples/05-collections-and-borrowed-views/string-view.rs"
 test = true
 
 [[example]]
-name = "05-rwlock"
-path = "examples/05-concurrency-and-synchronization/rwlock.rs"
+name = "05-slice-view"
+path = "examples/05-collections-and-borrowed-views/slice-view.rs"
 test = true
 
 [[example]]
-name = "05-atomic-updates"
-path = "examples/05-concurrency-and-synchronization/atomic-updates.rs"
+name = "05-slice-mutation"
+path = "examples/05-collections-and-borrowed-views/slice-mutation.rs"
 test = true
 
 [[example]]
-name = "05-memory-ordering"
-path = "examples/05-concurrency-and-synchronization/memory-ordering.rs"
+name = "05-vec-growth"
+path = "examples/05-collections-and-borrowed-views/vec-growth.rs"
 test = true
 
 [[example]]
-name = "06-lazy-future-await"
-path = "examples/06-async-future-and-tokio/lazy-future-await.rs"
+name = "05-boxed-slice"
+path = "examples/05-collections-and-borrowed-views/boxed-slice.rs"
 test = true
 
 [[example]]
-name = "06-spawn-blocking"
-path = "examples/06-async-future-and-tokio/spawn-blocking.rs"
+name = "05-strings-utf8"
+path = "examples/05-collections-and-borrowed-views/strings-utf8.rs"
 test = true
 
 [[example]]
-name = "06-poll-waker"
-path = "examples/06-async-future-and-tokio/poll-waker.rs"
+name = "05-vec-slice"
+path = "examples/05-collections-and-borrowed-views/vec-slice.rs"
 test = true
 
 [[example]]
-name = "06-pin-unpin"
-path = "examples/06-async-future-and-tokio/pin-unpin.rs"
+name = "05-hashmap-entry"
+path = "examples/05-collections-and-borrowed-views/hashmap-entry.rs"
 test = true
 
 [[example]]
-name = "06-send-future"
-path = "examples/06-async-future-and-tokio/send-future.rs"
+name = "05-cow"
+path = "examples/05-collections-and-borrowed-views/cow.rs"
 test = true
 
 [[example]]
-name = "06-select-cancellation"
-path = "examples/06-async-future-and-tokio/select-cancellation.rs"
+name = "06-box-basics"
+path = "examples/06-smart-pointers-and-resource-management/box-basics.rs"
 test = true
 
 [[example]]
-name = "06-channel-cancellation"
-path = "examples/06-async-future-and-tokio/channel-cancellation.rs"
+name = "06-rc-sharing"
+path = "examples/06-smart-pointers-and-resource-management/rc-sharing.rs"
 test = true
 
 [[example]]
-name = "06-detach-abort"
-path = "examples/06-async-future-and-tokio/detach-abort.rs"
+name = "06-weak-lifecycle"
+path = "examples/06-smart-pointers-and-resource-management/weak-lifecycle.rs"
 test = true
 
 [[example]]
-name = "07-raw-pointer-safe-wrapper"
-path = "examples/07-unsafe-and-ffi/raw-pointer-safe-wrapper.rs"
+name = "06-arc-sharing"
+path = "examples/06-smart-pointers-and-resource-management/arc-sharing.rs"
 test = true
 
 [[example]]
-name = "07-ffi-handle"
-path = "examples/07-unsafe-and-ffi/ffi-handle.rs"
+name = "06-cell-counter"
+path = "examples/06-smart-pointers-and-resource-management/cell-counter.rs"
 test = true
 
 [[example]]
-name = "08-strings-utf8"
-path = "examples/08-collections-closures-and-engineering/strings-utf8.rs"
+name = "06-refcell-borrow"
+path = "examples/06-smart-pointers-and-resource-management/refcell-borrow.rs"
 test = true
 
 [[example]]
-name = "08-vec-slice"
-path = "examples/08-collections-closures-and-engineering/vec-slice.rs"
+name = "06-drop-raii"
+path = "examples/06-smart-pointers-and-resource-management/drop-raii.rs"
 test = true
 
 [[example]]
-name = "08-hashmap-entry"
-path = "examples/08-collections-closures-and-engineering/hashmap-entry.rs"
+name = "06-deref-coercion"
+path = "examples/06-smart-pointers-and-resource-management/deref-coercion.rs"
 test = true
 
 [[example]]
-name = "08-cow"
-path = "examples/08-collections-closures-and-engineering/cow.rs"
+name = "06-box-dst"
+path = "examples/06-smart-pointers-and-resource-management/box-dst.rs"
 test = true
 
 [[example]]
-name = "08-closure-traits"
-path = "examples/08-collections-closures-and-engineering/closure-traits.rs"
+name = "06-interior-mutability"
+path = "examples/06-smart-pointers-and-resource-management/interior-mutability.rs"
 test = true
 
 [[example]]
-name = "08-lazy-iterators"
-path = "examples/08-collections-closures-and-engineering/lazy-iterators.rs"
+name = "06-shared-ownership"
+path = "examples/06-smart-pointers-and-resource-management/shared-ownership.rs"
 test = true
 
 [[example]]
-name = "08-macro-evaluation"
-path = "examples/08-collections-closures-and-engineering/macro-evaluation.rs"
+name = "07-thread-ownership-scope"
+path = "examples/07-concurrency-and-synchronization/thread-ownership-scope.rs"
+test = true
+
+[[example]]
+name = "07-send-sync"
+path = "examples/07-concurrency-and-synchronization/send-sync.rs"
+test = true
+
+[[example]]
+name = "07-mutex-basics"
+path = "examples/07-concurrency-and-synchronization/mutex-basics.rs"
+test = true
+
+[[example]]
+name = "07-mutex-counter"
+path = "examples/07-concurrency-and-synchronization/mutex-counter.rs"
+test = true
+
+[[example]]
+name = "07-bounded-channel"
+path = "examples/07-concurrency-and-synchronization/bounded-channel.rs"
+test = true
+
+[[example]]
+name = "07-rwlock"
+path = "examples/07-concurrency-and-synchronization/rwlock.rs"
+test = true
+
+[[example]]
+name = "07-atomic-updates"
+path = "examples/07-concurrency-and-synchronization/atomic-updates.rs"
+test = true
+
+[[example]]
+name = "07-memory-ordering"
+path = "examples/07-concurrency-and-synchronization/memory-ordering.rs"
+test = true
+
+[[example]]
+name = "07-mutex-guard-invariants"
+path = "examples/07-concurrency-and-synchronization/mutex-guard-invariants.rs"
+test = true
+
+[[example]]
+name = "07-logical-race"
+path = "examples/07-concurrency-and-synchronization/logical-race.rs"
+test = true
+
+[[example]]
+name = "07-lock-order"
+path = "examples/07-concurrency-and-synchronization/lock-order.rs"
+test = true
+
+[[example]]
+name = "07-shared-store"
+path = "examples/07-concurrency-and-synchronization/shared-store.rs"
+test = true
+
+[[example]]
+name = "08-lazy-future-await"
+path = "examples/08-async-future-and-tokio/lazy-future-await.rs"
+test = true
+
+[[example]]
+name = "08-join-futures"
+path = "examples/08-async-future-and-tokio/join-futures.rs"
+test = true
+
+[[example]]
+name = "08-spawn-task"
+path = "examples/08-async-future-and-tokio/spawn-task.rs"
+test = true
+
+[[example]]
+name = "08-mpsc-basics"
+path = "examples/08-async-future-and-tokio/mpsc-basics.rs"
+test = true
+
+[[example]]
+name = "08-oneshot-basics"
+path = "examples/08-async-future-and-tokio/oneshot-basics.rs"
+test = true
+
+[[example]]
+name = "08-select-basics"
+path = "examples/08-async-future-and-tokio/select-basics.rs"
+test = true
+
+[[example]]
+name = "08-spawn-blocking"
+path = "examples/08-async-future-and-tokio/spawn-blocking.rs"
+test = true
+
+[[example]]
+name = "08-detach-abort"
+path = "examples/08-async-future-and-tokio/detach-abort.rs"
+test = true
+
+[[example]]
+name = "08-send-future"
+path = "examples/08-async-future-and-tokio/send-future.rs"
+test = true
+
+[[example]]
+name = "08-poll-waker"
+path = "examples/08-async-future-and-tokio/poll-waker.rs"
+test = true
+
+[[example]]
+name = "08-pin-unpin"
+path = "examples/08-async-future-and-tokio/pin-unpin.rs"
+test = true
+
+[[example]]
+name = "08-select-cancellation"
+path = "examples/08-async-future-and-tokio/select-cancellation.rs"
+test = true
+
+[[example]]
+name = "08-channel-cancellation"
+path = "examples/08-async-future-and-tokio/channel-cancellation.rs"
+test = true
+
+[[example]]
+name = "09-macro-evaluation"
+path = "examples/09-modules-cargo-macros-and-testing/macro-evaluation.rs"
+test = true
+
+[[example]]
+name = "10-raw-pointer-access"
+path = "examples/10-unsafe-ffi-and-layout/raw-pointer-access.rs"
+test = true
+
+[[example]]
+name = "10-unsafe-call"
+path = "examples/10-unsafe-ffi-and-layout/unsafe-call.rs"
+test = true
+
+[[example]]
+name = "10-raw-pointer-safe-wrapper"
+path = "examples/10-unsafe-ffi-and-layout/raw-pointer-safe-wrapper.rs"
+test = true
+
+[[example]]
+name = "10-ffi-handle"
+path = "examples/10-unsafe-ffi-and-layout/ffi-handle.rs"
 test = true

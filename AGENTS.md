@@ -15,19 +15,20 @@
 运行指定示例：
 
 ```bash
-cargo run --locked --example 01-move-copy-clone
-cargo run --locked --bin 01-ownership-and-borrowing
+cargo run --locked --example 02-move-copy-clone
+cargo run --locked --bin 02-ownership-and-lifetimes
 ```
 
 ## 新增或修改示例
 
 1. 一个目录只讲一个主要章节，避免把无关概念混在同一个示例中。
-2. 新示例放在 `examples/<chapter>-<topic>/`，章节号使用两位数字，知识点文件使用 kebab-case，例如 `move-copy-clone.rs`。01–07 对应七条主线，08 是补充篇；章内按 P0 → P1 组织示例。
-3. 每个示例提供 `pub fn main()`，目标名为 `<chapter>-<concept>`，能通过 `cargo run --locked --example <target>` 独立运行。章节入口通过 `#[path]` 导入同一份代码，保留原有 `cargo run --locked --bin <chapter>-<topic>` 命令；不复制教学逻辑。
+2. 新示例放在 `examples/<chapter>-<topic>/`，章节号使用两位数字，知识点文件使用 kebab-case，例如 `move-copy-clone.rs`。01–10 与 Rust Wiki 的十个主题、正文和思维导图一级分支一一对应；章内先读基础动作，再读机制和边界，最后读综合例；P0/P1 表示复习分级，可在各阶段内选读。
+3. 每个示例提供 `pub fn main()`（Tokio 示例可用 `#[tokio::main]` 修饰 `pub async fn main()`），目标名为 `<chapter>-<concept>`，能通过 `cargo run --locked --example <target>` 独立运行。章节入口通过 `#[path]` 导入同一份代码，使用同编号、同主题的 `cargo run --locked --bin <chapter>-<topic>` 命令；旧编号仅在 README 迁移表中说明，不保留别名；不复制教学逻辑。
 4. 文件开头用简短中文说明问题、输入与状态变化、结果证据、改一处代码的观察点、边界和运行命令；其余注释解释“为什么”，不要逐行复述代码。术语和注释风格应与相邻示例保持一致。
 5. 输出应简洁、稳定，并能直观体现当前语言特性。
 6. 优先使用最小代码展示概念，不为教程示例引入不必要的抽象、依赖或工程化结构。
 7. 同一章节的补充代码放在该章的示例目录并接入章节聚合入口，不创建未编号的平级 binary。异步示例独立创建 `current_thread` runtime；同步章节入口顺序调用，避免嵌套 runtime。
+8. 基础入口尽量只引入一个新知识点，先展示输入、状态与结果，再解释边界。README 与章节调用顺序保持一致：先基础动作，再机制和边界，最后综合应用。计数器、共享日志等验证工具优先放测试，避免首例先要求理解辅助机制；保留综合例及其既有命令。
 
 ## 无法编译或会 panic 的教学代码
 
@@ -64,6 +65,8 @@ cargo run --locked --bin <chapter-name>
 ```
 
 如果增加了包含分支或数据转换的辅助函数，应补充单元测试并运行 `cargo test`。
+
+09 的 `limit-demo` 是独立最小库工程，需要另跑其 manifest 的格式检查和普通 `cargo test --locked --offline --manifest-path examples/09-modules-cargo-macros-and-testing/limit-demo/Cargo.toml --target-dir target/09-limit-demo`，分别确认单元、集成和文档测试。根包的 `--all-targets` 不覆盖这个独立工程，也不能代替文档测试；不为此引入 workspace 或依赖。
 
 ## 完成标准
 
